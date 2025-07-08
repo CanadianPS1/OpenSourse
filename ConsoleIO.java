@@ -1,6 +1,7 @@
 package lib;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleIO {
@@ -16,8 +17,21 @@ public class ConsoleIO {
 	 * @return the input from the user as a String
 	 */
 	public static String promptForString(String prompt, boolean allowBlank){
-		//TODO Implement this method with the proper logic
-		throw new UnsupportedOperationException("The promptForString method is not yet implemented.");
+		while(true){
+			System.out.println(prompt);
+			try{
+				String input = buffy.readLine();
+				if(input == null && !allowBlank){
+					continue;
+				}if(!allowBlank && input.trim().isEmpty()){
+					System.out.println("Input cannot be blank");
+				}
+				return input;
+			}catch (IOException e){
+				System.out.println("You have a bad exeption tyr again");
+			}
+		}
+		//throw new UnsupportedOperationException("The promptForString method is not yet implemented.");
 	}
 	
 	/**
