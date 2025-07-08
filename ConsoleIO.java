@@ -70,8 +70,25 @@ public class ConsoleIO {
 	 * @return the boolean value
 	 */
 	public static boolean promptForBoolean(String prompt, String trueString, String falseString){
-		//TODO Implement this method with the proper logic
-		throw new UnsupportedOperationException("The promptForBoolean method is not yet implemented.");
+		 while(true){
+            System.out.println(prompt);
+            try{
+                String input = buffy.readLine();
+                if((input.toLowerCase()).equals(trueString.toLowerCase())){
+					System.out.println("The String was True");
+					return true;
+                }else if((input.toLowerCase()).equals(falseString.toLowerCase())){
+					System.out.println("The String was False");
+					return false;
+				}else{
+					System.out.println("Invalid Prompt");
+					continue;
+				}
+            }catch (IOException e){
+                System.out.println("You have a bad exeption try again");
+            }
+        }
+		//throw new UnsupportedOperationException("The promptForBoolean method is not yet implemented.");
 	}
 
 	/**
