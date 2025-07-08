@@ -23,6 +23,7 @@ public class ConsoleIO {
                     continue;
                 }if(!allowBlank && input.trim().isEmpty()){
                     System.out.println("Input cannot be blank");
+					continue;
                 }
                 return input;
             }catch (IOException e){
@@ -45,11 +46,16 @@ public class ConsoleIO {
             System.out.println(prompt);
             try{
                 String inputTemp = buffy.readLine();
+				if(inputTemp.trim().isEmpty()){
+					continue;
+				}
 				int input = Integer.parseInt(inputTemp);
-                if((input <= max && input >= min) && !(inputTemp.trim().isEmpty())){
-                    System.out.println("Input cannot be blank or is above or below the max");
-                }
-                return input;
+                if(input <= max && input >= min){
+					return input;
+                }else{
+					System.out.println("Input cannot be blank or is above or below the max");
+					continue;
+				}
             }catch (IOException e){
                 System.out.println("You have a bad exeption try again");
             }
