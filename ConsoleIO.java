@@ -1,5 +1,3 @@
-package lib;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,20 +16,20 @@ public class ConsoleIO {
 	 */
 	public static String promptForString(String prompt, boolean allowBlank){
 		while(true){
-			System.out.println(prompt);
-			try{
-				String input = buffy.readLine();
-				if(input == null && !allowBlank){
-					continue;
-				}if(!allowBlank && input.trim().isEmpty()){
-					System.out.println("Input cannot be blank");
-				}
-				return input;
-			}catch (IOException e){
-				System.out.println("You have a bad exeption tyr again");
-			}
-		}
-		//throw new UnsupportedOperationException("The promptForString method is not yet implemented.");
+            System.out.println(prompt);
+            try{
+                String input = buffy.readLine();
+                if(input == null && !allowBlank){
+                    continue;
+                }if(!allowBlank && input.trim().isEmpty()){
+                    System.out.println("Input cannot be blank");
+                }
+                return input;
+            }catch (IOException e){
+                System.out.println("You have a bad exeption try again");
+            }
+        }
+        //throw new UnsupportedOperationException("The promptForString method is not yet implemented.");
 	}
 	
 	/**
@@ -43,8 +41,20 @@ public class ConsoleIO {
 	 * @return the int value
 	 */
 	public static int promptForInt(String prompt, int min, int max){
-		//TODO Implement this method with the proper logic
-		throw new UnsupportedOperationException("The promptForInt method is not yet implemented.");
+		 while(true){
+            System.out.println(prompt);
+            try{
+                String inputTemp = buffy.readLine();
+				int input = Integer.parseInt(inputTemp);
+                if((input <= max && input >= min) && !(inputTemp.trim().isEmpty())){
+                    System.out.println("Input cannot be blank or is above or below the max");
+                }
+                return input;
+            }catch (IOException e){
+                System.out.println("You have a bad exeption try again");
+            }
+        }
+        //throw new UnsupportedOperationException("The promptForInt method is not yet implemented.");
 	}
 	
 	/**
