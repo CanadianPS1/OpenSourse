@@ -111,13 +111,13 @@ public class ConsoleIO {
 					System.out.println("[0] Quit");
 				}
 				for(int i = 0; i < options.length; i++){
-					System.out.println("[" + i + 1 + "]" + options[i]);
+					System.out.println("[" + (i + 1) + "]" + options[i]);
 				}
 				String inputTemp = buffy.readLine();
 				int input = Integer.parseInt(inputTemp);
-				if(input >= 0 && input <= options.length + 1 && withQuit){
+				if(input >= 0 && input <= options.length && withQuit){
 					return input;
-				}else if(input >= 1 && input <= options.length + 1){
+				}else if(input >= 1 && input <= options.length){
 					return input;
 				}else{
 					continue;

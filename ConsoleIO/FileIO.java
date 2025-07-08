@@ -3,5 +3,10 @@ public class FileIO {
         ConsoleIO.promptForString("Say hi", false);
         ConsoleIO.promptForInt("Give me a Number Between 1 and 10", 1, 10);
         ConsoleIO.promptForBoolean("Are you cool?", "Yes", "No");
+        String[] options = new String[3];
+        options[0] = "Settings";
+        options[1] = "Conroles";
+        options[2] = "Play";
+        System.out.println(ConsoleIO.promptForMenuSelection(options, true));
     }
 }
