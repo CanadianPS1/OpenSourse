@@ -57,9 +57,9 @@ public class ConsoleIO {
 					continue;
 				}
             }catch (IOException e){
-                System.out.println("You have a bad exeption try again");
+                System.out.println(e);
             }catch(NumberFormatException e){
-				System.out.println("Number Format Exemtion");
+				System.out.println(e);
 			}
         }
         //throw new UnsupportedOperationException("The promptForInt method is not yet implemented.");
