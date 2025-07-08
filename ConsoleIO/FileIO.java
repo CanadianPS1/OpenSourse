@@ -7,6 +7,6 @@ public class FileIO {
         options[0] = "Settings";
         options[1] = "Conroles";
         options[2] = "Play";
-        System.out.println(ConsoleIO.promptForMenuSelection(options, true));
+        ConsoleIO.promptForMenuSelection(options, true);
     }
 }
