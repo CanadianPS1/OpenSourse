@@ -41,7 +41,7 @@ public class ConsoleIO {
 	 * @return the int value
 	 */
 	public static int promptForInt(String prompt, int min, int max){
-		 while(true){
+		while(true){
             System.out.println(prompt);
             try{
                 String inputTemp = buffy.readLine();
@@ -70,7 +70,7 @@ public class ConsoleIO {
 	 * @return the boolean value
 	 */
 	public static boolean promptForBoolean(String prompt, String trueString, String falseString){
-		 while(true){
+		while(true){
             System.out.println(prompt);
             try{
                 String input = buffy.readLine();
@@ -99,8 +99,29 @@ public class ConsoleIO {
 	 * @return the int of the selection made by the user
 	 */
 	public static int promptForMenuSelection(String[] options, boolean withQuit){
-		//TODO Implement this method with the proper logic
-		throw new UnsupportedOperationException("The promptForMenuSelection method is not yet implemented.");
+		while(true){
+            try{
+				if(withQuit){
+					System.out.println("[0] Quit");
+				}
+				for(int i = 0; i < options.length; i++){
+					System.out.println("[" + i + 1 + "]" + options[i]);
+				}
+				String inputTemp = buffy.readLine();
+				int input = Integer.parseInt(inputTemp);
+				if(input >= 0 && input <= options.length + 1 && withQuit){
+					return input;
+				}else if(input >= 1 && input <= options.length + 1){
+					return input;
+				}else{
+					continue;
+				}
+
+            }catch (IOException e){
+                System.out.println("You have a bad exeption try again");
+            }
+        }
+		//throw new UnsupportedOperationException("The promptForMenuSelection method is not yet implemented.");
 	}
 
 }
