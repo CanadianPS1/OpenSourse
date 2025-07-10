@@ -1,13 +1,8 @@
 package csc180.roeback.lia;
 import java.util.Random;
 import java.util.ArrayList;
-<<<<<<< HEAD:number_guessing_game/src/main/java/csc180/roeback/lia/App.java
 import ConsoleIO.ConsoleIO;
-public class App{
-=======
-import ConsoleIO.jar;
 public class Run{
->>>>>>> 8df7dac5643632f4e59e55559548a90323e357a5:number_guessing_game/src/main/java/csc180/roeback/lia/Run.java
     public static void main( String[] args ){
         promptForDiffuculty();
     }
