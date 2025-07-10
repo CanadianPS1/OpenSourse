@@ -3,7 +3,7 @@ import java.util.Random;
 import java.io.IOException;
 import java.util.ArrayList;
 import ConsoleIO.jar;
-public class App{
+public class Run{
     public static void main( String[] args ){
         promptForDiffuculty();
     }
