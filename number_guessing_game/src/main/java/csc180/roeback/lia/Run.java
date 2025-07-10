@@ -1,9 +1,9 @@
 package csc180.roeback.lia;
 import java.util.Random;
 import java.util.ArrayList;
-import ConsoleIO.ConsoleIO;
+import OpenSourse.ConsoleIO.ConsoleIO;
 public class Run{
-    public static void main( String[] args ){
+    public static void main(String[] args){
         promptForDiffuculty();
     }
     //prompts for the diffeculty and starts the game
