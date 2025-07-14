@@ -1,3 +1,5 @@
+package ConsoleIOProject;
+
 public class FileIO {
     public static void main(String [] args){
         ConsoleIO.promptForString("Say hi", false);

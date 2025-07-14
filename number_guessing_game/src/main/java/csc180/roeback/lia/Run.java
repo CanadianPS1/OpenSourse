@@ -1,7 +1,7 @@
 package csc180.roeback.lia;
 import java.util.Random;
 import java.util.ArrayList;
-import ConsoleIO.ConsoleIO;
+import ConsoleIOProject.ConsoleIO;
 public class Run{
     public static void main( String[] args ){
         promptForDiffuculty();
