@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import ConsoleIOProject.ConsoleIO;
 public class Run{
-    public static void main( String[] args ){
+    public static void main(String[] args){
         promptForDiffuculty();
     }
     //prompts for the diffeculty and starts the game
