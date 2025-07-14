@@ -1,8 +1,8 @@
 package csc180.roeback.lia;
 import java.util.Random;
 import java.util.ArrayList;
-import ConsoleIOProject.ConsoleIO;
-public class Run{
+import ConsoleIO.ConsoleIO;
+public class App{
     public static void main(String[] args){
         promptForDiffuculty();
     }
@@ -52,7 +52,7 @@ public class Run{
                 if(trys > maxTrys){
                     System.out.println("you FAILED \n the number was " + randomNum + "\n Would you like to play again? \nYES\nNO");
                 }else{
-                    System.out.println(" Would you like to play again? \\n" + "YES\\n" + "NO");
+                    System.out.println(" Would you like to play again?  \n" + "YES \n" + "NO");
                 }
                 while(true){
                     String playAgain = ConsoleIO.promptForString("", false);
