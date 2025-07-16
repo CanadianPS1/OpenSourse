@@ -1,12 +1,13 @@
 package csc180.roeback.lia;
 import java.util.Random;
 import java.util.ArrayList;
-import ConsoleIO.ConsoleIO;
+//import lib.ConsoleIO;
 public class App{
     public static void main(String[] args){
         promptForDiffuculty();
     }
     //prompts for the diffeculty and starts the game
+    @SuppressWarnings("UnnecessaryContinue")
     public static void promptForDiffuculty(){
         while(true){
             String difficulty = ConsoleIO.promptForString("~SELCT DIFFUCULTY~ \n EASY \n MEDIUM \n HARD", false);
@@ -52,7 +53,10 @@ public class App{
                 if(trys > maxTrys){
                     System.out.println("you FAILED \n the number was " + randomNum + "\n Would you like to play again? \nYES\nNO");
                 }else{
-                    System.out.println(" Would you like to play again?  \n" + "YES \n" + "NO");
+                    System.out.println("""
+                                        Would you like to play again?  
+                                       YES 
+                                       NO""");
                 }
                 while(true){
                     String playAgain = ConsoleIO.promptForString("", false);
