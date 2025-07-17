@@ -10,6 +10,7 @@ public class App{
         JSONParser parser = new JSONParser();
         try {
             int i = 50;
+            if(i == 1) i = 2;
             //grabs the JSON and gets the i person from it
             JSONArray stockReport = (JSONArray) parser.parse(new FileReader("OpenSourse\\stock_statement_generator\\src\\main\\java\\csc180\\roeback\\lia\\stocks.json"));
             JSONObject person = (JSONObject) stockReport.get(i);
