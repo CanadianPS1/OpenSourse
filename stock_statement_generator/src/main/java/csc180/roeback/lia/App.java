@@ -1,16 +1,18 @@
 package csc180.roeback.lia;
 import java.io.FileReader;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-import java.time.LocalDate;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 public class App{
     public static void main(String [] args ){
         JSONParser parser = new JSONParser();
         try {
             int i = 50;
-            if(i == 1) i = 2;
             //grabs the JSON and gets the i person from it
             JSONArray stockReport = (JSONArray) parser.parse(new FileReader("OpenSourse\\stock_statement_generator\\src\\main\\java\\csc180\\roeback\\lia\\stocks.json"));
             JSONObject person = (JSONObject) stockReport.get(i);
@@ -71,8 +73,8 @@ public class App{
             System.out.println("|" + printer("Stock Earnings: $" + stockEarnings, 54) + "||");
             System.out.println("||______________________________________________________||");
 
-        }catch(Exception e) {
-            e.printStackTrace();
+        }catch(IOException e) {
+            System.out.println(e);
         } 
     }
     public static String printer(String word, int widthOfSection){
