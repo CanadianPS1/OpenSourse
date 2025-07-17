@@ -13,7 +13,7 @@ public class App{
     public static void main(String [] args ) throws ParseException{
         JSONParser parser = new JSONParser();
         try {
-            int i = 1;
+            //int i = 1;
             //grabs the JSON and gets the i person from it
             JSONArray stockReport = (JSONArray) parser.parse(new FileReader("OpenSourse\\stock_statement_generator\\src\\main\\java\\csc180\\roeback\\lia\\stocks.json"));
             for(Object report : stockReport){
