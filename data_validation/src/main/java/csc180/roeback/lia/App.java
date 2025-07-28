@@ -17,18 +17,17 @@ public class App{
         System.out.println(new Main().validatePasswordComplexity("B@byGr0k1sS0C00l",10,1,1,2,1));
         System.out.println(new Main().validatePasswordComplexity("BabyGr0k1sS0C00l",10,1,1,2,1));
         try {
-            String filePath = "C:\\Users\\spiel\\OneDrive\\Documents\\GitHub\\WebDev\\Weather\\Weather.html";
+            String filePath = "C:\\Users\\Lillia\\OneDrive\\Documents\\GitHub\\WebDev\\Weather\\Weather.html";
             String doc = new String(Files.readAllBytes(Paths.get(filePath)));
             String [] Content = new Main().getHTMLTagsContents(doc,"main");
-            for(int i = 0; i < Content.length; i++){
-                System.out.println(Content[i]);
+            for (String Content1 : Content) {
+                System.out.println(Content1);
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
         String[] links = new Main().getHTMLLinkURL("<a href=https://lms.neumont.edu/courses/3568799/assignments/38364932");
-        for(int i = 0; i < links.length; i++){
-            System.out.println(links[i]);
+        for (String link : links) {
+            System.out.println(link);
         }
     }
 }
