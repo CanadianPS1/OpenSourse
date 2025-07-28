@@ -11,8 +11,7 @@ public class Main implements RegexUtility{
 	 */
     @Override
     public boolean isValidHumanName(String name){
-        if(name.matches("\\w+.\\s\\w+\\s\\w+")) return true;
-        else return false;
+        return name.matches("\\w+.\\s\\w+\\s\\w+");
     }
     /**
 	 * Username must be at least 1 non-numeric character.  After the first character and before the '@' can be any alpha (any case)
@@ -24,8 +23,7 @@ public class Main implements RegexUtility{
 	 */
     @Override
     public boolean isValidEmailAddress(String email){
-        if(email.matches("[^0-9]\\w+@\\w+\\.\\w{3}")) return true;
-        else return false;
+        return email.matches("[^0-9]\\w+@\\w+\\.\\w{3}");
     }
     /**
 	 * Returns if movie title has a release year before 1995.
@@ -53,9 +51,7 @@ public class Main implements RegexUtility{
         if(matcher.find()){
             if(!(matcher.group(1).equals("000")) && !(matcher.group(2).equals("00")) && !(matcher.group(1).equals("0000"))){
                 if(!(matcher.group(1).equals("666"))){
-                    if(!(Integer.parseInt(matcher.group(1)) < 999 && Integer.parseInt(matcher.group(1)) > 900)){
-                        return true;
-                    }else return false;
+                    return !(Integer.parseInt(matcher.group(1)) < 999 && Integer.parseInt(matcher.group(1)) > 900);
                 } else return false;
             }else return false;
         }else return false;
@@ -103,8 +99,7 @@ public class Main implements RegexUtility{
                                 type == Character.FINAL_QUOTE_PUNCTUATION ||
                                 type == Character.OTHER_PUNCTUATION) amountOfSymbles++;
                         }
-                        if(amountOfSymbles >= minSymbols) return true;
-                        else return false;
+                        return amountOfSymbles >= minSymbols;
                     }else return false;
                 }else return false;
             }else return false;
@@ -117,6 +112,7 @@ public class Main implements RegexUtility{
 	 * @return
 	 */
     @Override
+    @SuppressWarnings("UnnecessaryContinue")
     public String[] getHTMLTagsContents(String html, String tagName){
         ArrayList<String> tags = new ArrayList<>();
         Pattern pattern = Pattern.compile("<!DOCTYPE\\s+html>");
@@ -126,11 +122,11 @@ public class Main implements RegexUtility{
             for(int i = html.indexOf(tagName); i < html.length(); i++){
                 if(html.charAt(i) == ' ') continue;
                 if(html.charAt(i) == '<'){
-                    String checkForEnd = "";
+                    String checkForEnd;
                     checkForEnd =  "" + html.charAt(i);
                     if(checkForEnd.contains(tagName)){
                         tags.remove(0);
-                        return tags.toArray(new String[0]);
+                        return tags.toArray(String[]::new);
                     }
                     tags.add(dummy);
                     dummy = "";
@@ -139,7 +135,7 @@ public class Main implements RegexUtility{
                         checkForEnd += html.charAt(i);
                         if(checkForEnd.contains(tagName)){
                             tags.remove(0);
-                            return tags.toArray(new String[0]);
+                            return tags.toArray(String[]::new);
                         }
                         if(html.charAt(i) == '>') break;
                     }
@@ -152,7 +148,7 @@ public class Main implements RegexUtility{
             System.out.println("Is not a HTML doc");
         }
         tags.remove(0);
-        return tags.toArray(new String[0]);
+        return tags.toArray(String[]::new);
     }
     /**
 	 * For all occurrences of a link tag ("<a href=..") in the string html
@@ -182,7 +178,7 @@ public class Main implements RegexUtility{
         }else{
             System.err.println("Not Valid <a>");
         }
-        return words.toArray(new String[0]);
+        return words.toArray(String[]::new);
     }
     
 }
