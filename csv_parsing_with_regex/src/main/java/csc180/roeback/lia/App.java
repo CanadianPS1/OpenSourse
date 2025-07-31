@@ -4,8 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-public class App 
-{
+public class App{
     public static void main(String [] args){
         StringBuilder peopleCsv = new StringBuilder();
 
