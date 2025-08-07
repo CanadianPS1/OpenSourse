@@ -11,15 +11,15 @@ import javafx.stage.Stage;
 public class App extends Application{
     private EventHandler<ActionEvent> onClick;
     private int clickAmount = 0;
+    private GridPane grid;
     private Button button;
     private Scene scene;
-    private GridPane grid;
     @Override
     public void start(@SuppressWarnings("exports") Stage stage){
         grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
+        grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(25,25,25,25));
         scene = new Scene(grid, 640, 480);
         button = new Button("Click Me!!!");
@@ -32,11 +32,6 @@ public class App extends Application{
         stage.setScene(scene);
         stage.show();
     }
-    public static void main(String [] args){
-        launch();
-    }
-    public void addToCount(){
-        clickAmount++;
-    }
-    
+    public static void main(String [] args){launch();}
+    public void addToCount(){clickAmount++;}
 }
