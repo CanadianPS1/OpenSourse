@@ -1,0 +1,11 @@
+.text-area {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 14px;
+    -fx-text-fill: darkblue;
+    -fx-background-color: #f5faff;
+}
+ 
+.label {
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+}
