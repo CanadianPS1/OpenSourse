@@ -21,12 +21,12 @@ public class Mole{
         scheduler.scheduleAtFixedRate(jumping, 0, 500, TimeUnit.MILLISECONDS);
     }
     public void startMole(){jumpChecker.start();}
+    //checks for if the mole passed the check, and if it does then the mole will pop up
     public final void jumping(){
         jumping = () -> {
             Random rand = new Random();
             int randInt = rand.nextInt(chance) + 1;
             if(randInt == 1){
-                System.out.println("Hit At\nNum: " + randInt + "\nChance: " + chance);
                 chance = chanceConst;
                 up = true;
             }else{
