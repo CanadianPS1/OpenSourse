@@ -51,8 +51,7 @@ public class App extends Application{
             if(mole6.up)sendMoleUp(mole6);
             if(mole7.up)sendMoleUp(mole7);
             if(mole8.up)sendMoleUp(mole8);
-            if(mole9.up)sendMoleUp(mole9);
-            
+            if(mole9.up)sendMoleUp(mole9); 
         };
         scheduler.scheduleAtFixedRate(timeRefresher, 0, 100, TimeUnit.MILLISECONDS);
         timeRefresherThread = new Thread(timeRefresher);
