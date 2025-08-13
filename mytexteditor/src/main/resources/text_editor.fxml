@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+ 
+<BorderPane xmlns="http://javafx.com/javafx/21.0.1"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.TextEditorController2">
+ 
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Open" onAction="#handleOpen"/>
+                <MenuItem text="Save" onAction="#handleSave"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About" onAction="#handleAbout"/>
+            </Menu>
+        </MenuBar>
+    </top>
+ 
+    <center>
+        <TextArea fx:id="textArea" promptText="Start typing here..."/>
+    </center>
+ 
+    <bottom>
+        <Label fx:id="statusLabel" text="Unsaved Changes: No" style="-fx-padding: 5;" />
+    </bottom>
+ 
+</BorderPane>
+ 
+ 
