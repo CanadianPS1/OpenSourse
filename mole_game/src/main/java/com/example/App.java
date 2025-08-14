@@ -2,13 +2,14 @@ package com.example;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javafx.geometry.VPos;
-import javafx.geometry.HPos;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -241,15 +242,26 @@ public class App extends Application{
     public void gameEnd(){
         if(!gameOver){
             gameOver = true;
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,1);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),1,1);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),2,1);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
-            \grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
-            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
+            Platform.runLater(() -> {
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,1);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),1,1);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),2,1);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),1,2);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),2,2);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),1,3);
+                grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),2,3);
+                TextField winOrLoss = new TextField();
+                winOrLoss.setStyle("-fx-text-fill: white; -fx-background-color: #352f2fff; -fx-font-size: 15px; -fx-background-color: transparent;");
+                if(score < 25){
+                    winOrLoss.setText("You Scored " + score + " YOU LOSE!!!");
+                }else{
+                    winOrLoss.setText("You Scored " + score + " YOU WIN!!!");
+                }
+                grid.add(winOrLoss,1,1);
+                winOrLoss.setEditable(false);
+            });
         }
     }
     public void sendMoleDown(Button moleButton){if(moleButton.isVisible())moleButton.setVisible(false);}
