@@ -8,19 +8,22 @@ public class Mole{
     private final Thread jumpChecker;
     private final int chanceConst;
     private final int increment;
+    private final int index;
     private Runnable jumping;
     private int chance;
     public boolean up;
-    public Mole(int c, int i){
+    public Mole(int c, int i, int ix){
         chanceConst = c;
         increment = i;
+        index = ix;
         up = false;
         chance = c;
         jumping();
         jumpChecker = new Thread(jumping);
-        scheduler.scheduleAtFixedRate(jumping, 0, 500, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(jumping, 0, 1000, TimeUnit.MILLISECONDS);
     }
     public void startMole(){jumpChecker.start();}
+    public int getMoleIndex(){return index;}
     //checks for if the mole passed the check, and if it does then the mole will pop up
     public final void jumping(){
         jumping = () -> {
@@ -31,7 +34,7 @@ public class Mole{
                 up = true;
             }else{
                 up = false;
-                if(!(chance <= 5))chance -= increment;
+                if(!(chance <= 5) && chance - increment > 1)chance -= increment;
             }
         };
     }

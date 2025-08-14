@@ -20,6 +20,11 @@ public class Timer{
         int min = timeLeft / 60;
         String sec = timeLeft % 60 + "";
         if(Integer.parseInt(sec) < 10)sec = "0" + sec;
-        return min + ":" + sec;
+        if((min + ":" + sec).equals("0:00")){
+            return "Game Over";
+        }else{
+            return min + ":" + sec;
+        }
+            
     }
 }
