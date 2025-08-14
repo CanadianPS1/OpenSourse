@@ -48,7 +48,7 @@ public class App extends Application{
     private boolean gameOver = false;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @Override
-    public void start(@SuppressWarnings("exports") Stage stage){
+    public void start(Stage stage){
         //sets up my grid
         grid = new GridPane();
         //sets up the timer
