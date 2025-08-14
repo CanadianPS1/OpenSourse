@@ -24,6 +24,7 @@ public class App extends Application{
     private Runnable timeRefresher;
     private Thread timeRefresherThread;
     private TextField timeDisplay;
+    private TextField scoreDisplay;
     private Label topBar1;
     private Label topBar2;
     private Label topBar3;
@@ -43,6 +44,7 @@ public class App extends Application{
     private Button mole8Button;
     private Button mole9Button;
     private int score = 0;
+    private boolean gameOver = false;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @Override
     public void start(@SuppressWarnings("exports") Stage stage){
@@ -54,39 +56,36 @@ public class App extends Application{
         timeDisplay.setEditable(false);
         timeDisplay.setAlignment(Pos.CENTER);
         timeDisplay.setText("00:00");
-
-
+        scoreDisplay = new TextField();
+        scoreDisplay.setStyle("-fx-text-fill: white; -fx-background-color: #e0e0e0ff; -fx-font-size: 30px; -fx-background-color: transparent;");
+        scoreDisplay.setEditable(false);
+        scoreDisplay.setAlignment(Pos.CENTER);
+        scoreDisplay.setText(score + "");
         //~creates the map~
         //creates the Bar for the timer and score to sit on
         grid.add(createSolidColorLabel("-fx-background-color: #2E2E2E;", 640, 100),0,0);
         grid.add(createSolidColorLabel("-fx-background-color: #2E2E2E;", 640, 100),1,0);
         grid.add(createSolidColorLabel("-fx-background-color: #2E2E2E;", 640, 100),2,0);
         grid.add(timeDisplay,1,0);
-
-
+        grid.add(scoreDisplay,0,0);
         //creates the play area
         //creates the first row of map
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),0,1);
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),1,1);
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),2,1);
-
         //creates the second row of map
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),0,2);
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),1,2);
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),2,2);
-
         //creates the third row of map
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),0,3);
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),1,3);
         grid.add(createSolidColorLabel("-fx-background-color: #468f46ff;", 640, 380),2,3);
-
-
         //puts a boarder around the play area
         //creates the left border
         grid.add(createSolidColorLabel("-fx-background-color: #1c2b1cff", 20, 480),0,1);
         grid.add(createSolidColorLabel("-fx-background-color: #1c2b1cff", 20, 480),0,2);
         grid.add(createSolidColorLabel("-fx-background-color: #1c2b1cff", 20, 480),0,3);
-
         //creates the top boarder
         topBar1 = createSolidColorLabel("-fx-background-color: #1c2b1cff", 680, 20);
         grid.add(topBar1,0,1);
@@ -97,8 +96,6 @@ public class App extends Application{
         topBar3 = createSolidColorLabel("-fx-background-color: #1c2b1cff", 680, 20);
         grid.add(topBar3,2,1);
         GridPane.setValignment(topBar3, VPos.TOP);
-
-
         //creates the bottom boarder
         botBar1 = createSolidColorLabel("-fx-background-color: #1c2b1cff", 680, 20);
         grid.add(botBar1,0,3);
@@ -110,8 +107,6 @@ public class App extends Application{
         grid.add(botBar3,2,3);
         GridPane.setValignment(botBar3, VPos.BOTTOM);
         grid.add(createSolidColorLabel("-fx-background-color: #1c2b1cff", 20, 480),0,1);
-
-
         //creates the right boarder
         rightBar1 = createSolidColorLabel("-fx-background-color: #1c2b1cff", 20, 480);
         grid.add(rightBar1,2,1);
@@ -122,15 +117,9 @@ public class App extends Application{
         rightBar3 = createSolidColorLabel("-fx-background-color: #1c2b1cff", 20, 480);
         grid.add(rightBar3,2,3);
         GridPane.setHalignment(rightBar3, HPos.RIGHT);
-        
-        
         scene = new Scene(grid, 640, 480);
         stage.setScene(scene);
         stage.show();
-
-
-
-
         //makes all my moles
         Mole mole1 = new Mole(100, 5,1);
         Mole mole2 = new Mole(100, 5,2);
@@ -142,7 +131,6 @@ public class App extends Application{
         Mole mole8 = new Mole(100, 5,8);
         Mole mole9 = new Mole(100, 5,9);
         Timer timer = new Timer(90);
-
         mole1Button = createMoleButton();
         mole2Button = createMoleButton();
         mole3Button = createMoleButton();
@@ -152,7 +140,6 @@ public class App extends Application{
         mole7Button = createMoleButton();
         mole8Button = createMoleButton();
         mole9Button = createMoleButton();
-        
         grid.add(mole1Button, 0, 1);
         grid.add(mole2Button, 1, 1);
         grid.add(mole3Button, 2, 1);
@@ -162,13 +149,6 @@ public class App extends Application{
         grid.add(mole7Button, 0, 3);
         grid.add(mole8Button, 1, 3);
         grid.add(mole9Button, 2, 3);
-
-
-        
-
-
-
-
         //starts all my threads
         timer.startTimer();
         mole1.startMole();
@@ -180,12 +160,16 @@ public class App extends Application{
         mole7.startMole();
         mole8.startMole();
         mole9.startMole();
-
         //makes a thread that will update the UI timer to keep up with the Timer Classes thread, among other tasks that need to happen at that time intervel
         timeRefresher = () -> {
             //updates time
-            timeDisplay.setText(timer.getTime());
-            if(timeDisplay.getText().equals("Game Over"))timeDisplay.setVisible(false);
+            Platform.runLater(() -> {
+                timeDisplay.setText(timer.getTime());
+                if(timeDisplay.getText().equals("Game Over")){
+                    timeDisplay.setVisible(false);
+                    gameEnd();
+                }
+            });
             //checks if the moles are up, and if they are calls the method
             if(mole1.up)sendMoleUp(mole1Button);
             else sendMoleDown(mole1Button);
@@ -209,29 +193,17 @@ public class App extends Application{
         scheduler.scheduleAtFixedRate(timeRefresher, 0, 100, TimeUnit.MILLISECONDS);
         timeRefresherThread = new Thread(timeRefresher);
         timeRefresherThread.start();
-        
     }
-
     public Button createMoleButton(){
-        Image moleAlive = new Image(getClass().getResource("/mole.png").toExternalForm());
-        Image moleDead = new Image(getClass().getResource("/moleDead.png").toExternalForm());
-        ImageView moleAliveView = new ImageView(moleAlive);
-        ImageView moleDeadView = new ImageView(moleDead);
         Button button = new Button();
-        moleAliveView.setFitHeight(100);
-        moleAliveView.setFitHeight(100);
-        moleAliveView.setPreserveRatio(true);
-        moleDeadView.setFitHeight(100);
-        moleDeadView.setFitHeight(100);
-        moleDeadView.setPreserveRatio(true);
-        button.setGraphic(moleAliveView);
+        Platform.runLater(() -> {button.setGraphic(getAliveImage());});
         button.setStyle("-fx-background-color: transparent; -fx-padding: 20 20 20 50;");
         button.setVisible(false);
         button.setText("");
         onClick = (ActionEvent e) -> {
-            button.setGraphic(moleDeadView);
+            button.setGraphic(getDeadImage());
             score++;
-            System.out.println(score);
+            scoreDisplay.setText(score + "");
         };
         button.setOnAction(onClick);
         return button;
@@ -242,40 +214,44 @@ public class App extends Application{
         label.setPrefSize(width,height);
         return label;
     }
-    //will make the mole pop out of the hole
-    public void sendMoleUp(Button moleButton){
-
-
-        //BUG sense the moleAliveView and dead one arnt the same as the one declared into the first instence it wont count them as the same and so it doesnt turn it back
-        //if i just change it to first set the image in here it should be chill
-
-
+    public ImageView getAliveImage(){
         Image moleAlive = new Image(getClass().getResource("/mole.png").toExternalForm());
-        Image moleDead = new Image(getClass().getResource("/moleDead.png").toExternalForm());
         ImageView moleAliveView = new ImageView(moleAlive);
-        ImageView moleDeadView = new ImageView(moleDead);
         moleAliveView.setFitHeight(100);
         moleAliveView.setFitHeight(100);
         moleAliveView.setPreserveRatio(true);
+        return moleAliveView;
+    }
+    public ImageView getDeadImage(){
+        Image moleDead = new Image(getClass().getResource("/moleDead.png").toExternalForm());
+        ImageView moleDeadView = new ImageView(moleDead);
         moleDeadView.setFitHeight(100);
         moleDeadView.setFitHeight(100);
         moleDeadView.setPreserveRatio(true);
-        String moleGraphic = moleButton.getGraphic() + "";
-        String moleDeadGraphic = moleDeadView + "";
+        return moleDeadView;
+    }
+
+    //will make the mole pop out of the hole
+    public void sendMoleUp(Button moleButton){
         if(!moleButton.isVisible()){
-            if(moleGraphic.equals(moleDeadGraphic)){
-                System.out.println("changing mole to alive");
-                Platform.runLater(() -> {
-                    moleButton.setGraphic(moleAliveView);
-                });
-            }
+            Platform.runLater(() -> {moleButton.setGraphic(getAliveImage());});
             moleButton.setVisible(true);
         }
     }
-    public void sendMoleDown(Button moleButton){
-        if(moleButton.isVisible()){
-           moleButton.setVisible(false);
+    public void gameEnd(){
+        if(!gameOver){
+            gameOver = true;
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,1);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),1,1);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),2,1);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,2);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
+            \grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
+            grid.add(createSolidColorLabel("-fx-background-color: #c6dfc6ff", 680, 480),0,3);
         }
     }
+    public void sendMoleDown(Button moleButton){if(moleButton.isVisible())moleButton.setVisible(false);}
     public static void main(String [] args){launch();}
 }
