@@ -14,6 +14,7 @@ public class App extends Application{
     private Scene scene;
     private final int height = 8;
     private final int width = 8;
+    private final int barWidth = 15;
     private final String barColor = "#0e0d0cff";
     @Override
     public void start(@SuppressWarnings("exports") Stage stage){
@@ -28,32 +29,32 @@ public class App extends Application{
         //top
         for(int i = 0; i < width; i++){
             Label bar;
-            bar = createSolidColorLabel("-fx-background-color: " + barColor, 680,20);
-            grid.add(bar,i,height-(height-1));
+            bar = createSolidColorLabel("-fx-background-color: " + barColor, 680,barWidth);
+            grid.add(bar,i,height-(height));
             GridPane.setValignment(bar, VPos.TOP);
         }
         //right
         for(int i = 0; i < width; i++){
-            if(i > (height - (height))){
+            //if(i > (height - (height))){
                 Label bar;
-                bar = createSolidColorLabel("-fx-background-color: " + barColor, 20,480);
+                bar = createSolidColorLabel("-fx-background-color: " + barColor, barWidth,480);
                 grid.add(bar,width-1,i);
                 GridPane.setHalignment(bar, HPos.RIGHT);
-            }
+            //}
         }
         //left
         for(int i = 0; i < height; i++){
-            if(i > (height - (height))){
+            //if(i > (height - (height))){
                 Label bar;
-                bar = createSolidColorLabel("-fx-background-color: " + barColor, 20,480);
+                bar = createSolidColorLabel("-fx-background-color: " + barColor, barWidth,480);
                 grid.add(bar,0,i);
                 GridPane.setHalignment(bar, HPos.LEFT);
-            }
+            //}
         }
         //bottom
         for(int i = 0; i < width; i++){
             Label bar;
-            bar = createSolidColorLabel("-fx-background-color: " + barColor, 680,20);
+            bar = createSolidColorLabel("-fx-background-color: " + barColor, 680,barWidth);
             grid.add(bar,i,height-1);
             GridPane.setValignment(bar, VPos.BOTTOM);
         }
