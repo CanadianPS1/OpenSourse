@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -33,7 +35,13 @@ public class App extends Application{
     private Text wordSpot4;
     private Text wordSpot5;
     private int score = 0;
-    private int life = 6;
+    private int life = 7;
+    private Label head = new Label();
+    private Label body = new Label();
+    private Label leftArm = new Label();
+    private Label rightArm = new Label();
+    private Label leftLeg = new Label();
+    private Label rightLeg = new Label();
     private String regex = "[ a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ]";
     @Override
     public void start(@SuppressWarnings("exports") Stage stage){
@@ -88,6 +96,64 @@ public class App extends Application{
         guessBox.setStyle("-fx-text-alignment: center; -fx-font-size: 30px;");
         guessBox.setPrefSize(10,50);
         grid.add(guessBox,3,4);
+
+
+        Image headImage = new Image(getClass().getResource("/head.png").toExternalForm());
+        ImageView headImageView = new ImageView(headImage);
+        headImageView.setFitHeight(100);
+        headImageView.setFitHeight(100);
+        headImageView.setPreserveRatio(true);
+        head.setGraphic(headImageView);
+
+        Image bodyImage = new Image(getClass().getResource("/body.png").toExternalForm());
+        ImageView bodyImageView = new ImageView(bodyImage);
+        bodyImageView.setFitHeight(100);
+        bodyImageView.setFitHeight(100);
+        bodyImageView.setPreserveRatio(true);
+        body.setGraphic(bodyImageView);
+
+        Image leftArmImage = new Image(getClass().getResource("/LeftArm.png").toExternalForm());
+        ImageView leftArmImageView = new ImageView(leftArmImage);
+        leftArmImageView.setFitHeight(100);
+        leftArmImageView.setFitHeight(100);
+        leftArmImageView.setPreserveRatio(true);
+        leftArm.setGraphic(leftArmImageView);
+
+        Image rightArmImage = new Image(getClass().getResource("/RightArm.png").toExternalForm());
+        ImageView rightArmImageView = new ImageView(rightArmImage);
+        rightArmImageView.setFitHeight(100);
+        rightArmImageView.setFitHeight(100);
+        rightArmImageView.setPreserveRatio(true);
+        rightArm.setGraphic(rightArmImageView);
+
+        Image leftLegImage = new Image(getClass().getResource("/LeftLeg.png").toExternalForm());
+        ImageView leftLegImageView = new ImageView(leftLegImage);
+        leftLegImageView.setFitHeight(100);
+        leftLegImageView.setFitHeight(100);
+        leftLegImageView.setPreserveRatio(true);
+        leftLeg.setGraphic(leftLegImageView);
+
+        Image rightLegImage = new Image(getClass().getResource("/RightLeg.png").toExternalForm());
+        ImageView rightLegImageView = new ImageView(rightLegImage);
+        rightLegImageView.setFitHeight(100);
+        rightLegImageView.setFitHeight(100);
+        rightLegImageView.setPreserveRatio(true);
+        rightLeg.setGraphic(rightLegImageView);
+
+        head.setVisible(false);
+        body.setVisible(false);
+        leftArm.setVisible(false);
+        rightArm.setVisible(false);
+        leftLeg.setVisible(false);
+        rightLeg.setVisible(false);
+
+        grid.add(head,5,3);
+        grid.add(body,5,4);
+        grid.add(leftArm,5,4);
+        grid.add(rightArm,5,4);
+        grid.add(leftLeg,5,5);
+        grid.add(rightLeg,5,5);
+
         onClick = (ActionEvent e) -> {
             if(life != 0 && score < 5){
                 String guess = guessBox.getText();
@@ -136,7 +202,13 @@ public class App extends Application{
                         }
                     }else{
                         life--;
-                        if(life == 0){
+                        if(life == 6)head.setVisible(true);
+                        else if(life == 5)body.setVisible(true);
+                        else if (life == 4)leftArm.setVisible(true);
+                        else if(life == 3)rightArm.setVisible(true);
+                        else if(life == 2)leftLeg.setVisible(true);
+                        else if(life == 1){
+                            rightLeg.setVisible(true);
                             grid.add(createSolidColorLabel("-fx-background-color: #d3b349ff;", 640,480),3,1);
                             grid.add(createSolidColorLabel("-fx-background-color: #d3b349ff;", 640,480),3,2);
                             grid.add(createSolidColorLabel("-fx-background-color: #d3b349ff;", 640,480),3,3);
