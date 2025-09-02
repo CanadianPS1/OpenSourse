@@ -91,7 +91,6 @@ public class App extends Application{
         onClick = (ActionEvent e) -> {
             if(life != 0 && score < 5){
                 String guess = guessBox.getText();
-                System.out.println(word);
                 guessBox.setText("");
                 if(guess.matches(regex)){
                     if(regex.contains(guess.toLowerCase())){
